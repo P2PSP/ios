@@ -153,7 +153,7 @@
             </objects>
             <point key="canvasLocation" x="381" y="344"/>
         </scene>
-        <!--Camera Controller-->
+        <!--Camera-->
         <scene sceneID="683-wy-2lM">
             <objects>
                 <viewController id="zhm-d7-VLe" customClass="CameraController" sceneMemberID="viewController">
@@ -178,6 +178,7 @@
                             <constraint firstItem="Fg0-np-Whc" firstAttribute="top" secondItem="58l-kl-Umu" secondAttribute="bottom" id="vCl-Q8-jY4"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Camera" id="8Yc-UZ-NQh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D3-LX-hDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
