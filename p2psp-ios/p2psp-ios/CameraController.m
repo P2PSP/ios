@@ -8,10 +8,18 @@
 
 #import "CameraController.h"
 
+@interface CameraController ()
+@property(weak, nonatomic) IBOutlet UIToolbar *tbClose;
+@end
+
 @implementation CameraController
 
 - (void)viewDidLoad {
-  NSLog(@"CameraController");
+  [self.tbClose setBackgroundImage:[UIImage new]
+                forToolbarPosition:UIBarPositionAny
+                        barMetrics:UIBarMetricsDefault];
+  [self.tbClose setShadowImage:[UIImage new]
+            forToolbarPosition:UIToolbarPositionAny];
 }
 
 @end
