@@ -178,12 +178,23 @@
                                             </barButtonItem>
                                         </items>
                                     </toolbar>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="sQ1-m3-a26">
+                                        <rect key="frame" x="0.0" y="492" width="600" height="44"/>
+                                        <items>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="wus-NB-ZUs"/>
+                                            <barButtonItem systemItem="camera" id="T3H-WY-9sx"/>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="62L-It-ur7"/>
+                                        </items>
+                                    </toolbar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qbP-9S-pvb" secondAttribute="trailing" id="GhF-Vx-Z6U"/>
                                     <constraint firstItem="qbP-9S-pvb" firstAttribute="leading" secondItem="58l-kl-Umu" secondAttribute="leading" id="KEk-Ic-UCO"/>
                                     <constraint firstItem="qbP-9S-pvb" firstAttribute="top" secondItem="58l-kl-Umu" secondAttribute="top" id="MaW-AJ-zhC"/>
+                                    <constraint firstAttribute="trailing" secondItem="sQ1-m3-a26" secondAttribute="trailing" id="NZ0-zN-cmu"/>
+                                    <constraint firstAttribute="bottom" secondItem="sQ1-m3-a26" secondAttribute="bottom" id="kDt-Vg-qgH"/>
+                                    <constraint firstItem="sQ1-m3-a26" firstAttribute="leading" secondItem="58l-kl-Umu" secondAttribute="leading" id="uMT-CX-aOm"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -198,6 +209,7 @@
                     <navigationItem key="navigationItem" title="Camera" id="8Yc-UZ-NQh"/>
                     <connections>
                         <outlet property="tbClose" destination="qbP-9S-pvb" id="a9K-VJ-AMz"/>
+                        <outlet property="tbRecord" destination="sQ1-m3-a26" id="dpH-H2-k4H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D3-LX-hDz" userLabel="First Responder" sceneMemberID="firstResponder"/>

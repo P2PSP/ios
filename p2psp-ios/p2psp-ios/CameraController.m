@@ -10,17 +10,24 @@
 
 @interface CameraController ()
 @property(weak, nonatomic) IBOutlet UIToolbar *tbClose;
+@property(weak, nonatomic) IBOutlet UIToolbar *tbRecord;
 @end
 
 @implementation CameraController
 
 - (void)viewDidLoad {
-  // Set toolbar transparent
+  // Set toolbars transparent
   [self.tbClose setBackgroundImage:[UIImage new]
                 forToolbarPosition:UIBarPositionAny
                         barMetrics:UIBarMetricsDefault];
   [self.tbClose setShadowImage:[UIImage new]
             forToolbarPosition:UIToolbarPositionAny];
+
+  [self.tbRecord setBackgroundImage:[UIImage new]
+                 forToolbarPosition:UIBarPositionAny
+                         barMetrics:UIBarMetricsDefault];
+  [self.tbRecord setShadowImage:[UIImage new]
+             forToolbarPosition:UIToolbarPositionAny];
 
   // Hide navigation bar
   [self.navigationController setNavigationBarHidden:YES];
