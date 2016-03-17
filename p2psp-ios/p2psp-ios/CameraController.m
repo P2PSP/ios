@@ -11,6 +11,8 @@
 @interface CameraController ()
 @property(weak, nonatomic) IBOutlet UIToolbar *tbClose;
 @property(weak, nonatomic) IBOutlet UIToolbar *tbRecord;
+@property(nonatomic) IBOutlet UIBarButtonItem *bbiRecord;
+@property(nonatomic) IBOutlet UIBarButtonItem *bbiStop;
 @end
 
 @implementation CameraController
@@ -31,6 +33,22 @@
 
   // Hide navigation bar
   [self.navigationController setNavigationBarHidden:YES];
+
+  self.bbiStop = [[UIBarButtonItem alloc]
+      initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
+                           target:self
+                           action:@selector(onStop:)];
+
+  [self.bbiStop setTintColor:[UIColor redColor]];
+
+  self.bbiRecord = [[UIBarButtonItem alloc]
+      initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
+                           target:self
+                           action:@selector(onRecord:)];
+
+  [self.bbiRecord setTintColor:[UIColor whiteColor]];
+
+  [self updateBarButtonItem:self.bbiRecord inToolbar:self.tbRecord];
 }
 
 /**
@@ -40,6 +58,27 @@
  */
 - (BOOL)prefersStatusBarHidden {
   return YES;
+}
+
+- (void)updateBarButtonItem:(UIBarButtonItem *)bbi
+                  inToolbar:(UIToolbar *)toolbar {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    NSMutableArray *tbItems =
+        [[NSMutableArray alloc] initWithArray:[toolbar items]];
+    [tbItems replaceObjectAtIndex:1 withObject:bbi];
+
+    [toolbar setItems:tbItems];
+  });
+}
+
+- (IBAction)onRecord:(id)sender {
+  NSLog(@"Recording...");
+  [self updateBarButtonItem:self.bbiStop inToolbar:self.tbRecord];
+}
+
+- (IBAction)onStop:(id)sender {
+  NSLog(@"Stop");
+  [self updateBarButtonItem:self.bbiRecord inToolbar:self.tbRecord];
 }
 
 @end
