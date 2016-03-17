@@ -10,6 +10,7 @@
 		A90F96C81C9AE2FC00BC02AA /* VideoRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = A90F96C71C9AE2FC00BC02AA /* VideoRecorder.m */; };
 		A90F96CB1C9AE41100BC02AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A90F96CA1C9AE41100BC02AA /* Foundation.framework */; };
 		A90F96CD1C9AE41800BC02AA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A90F96CC1C9AE41800BC02AA /* MobileCoreServices.framework */; };
+		A9316CAB1C9AEEAD005BD61C /* HTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */; };
 		A979A5CC1C6B4AA4003DD37C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A979A5CB1C6B4AA4003DD37C /* Default-568h@2x.png */; };
 		A97D88971C5557D500428FC7 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A97D88961C5557D500428FC7 /* main.mm */; };
 		A97D889A1C5557D500428FC7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A97D88991C5557D500428FC7 /* AppDelegate.m */; };
@@ -64,6 +65,8 @@
 		A90F96C71C9AE2FC00BC02AA /* VideoRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoRecorder.m; sourceTree = "<group>"; };
 		A90F96CA1C9AE41100BC02AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A90F96CC1C9AE41800BC02AA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		A9316CA91C9AEEAD005BD61C /* HTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPClient.h; sourceTree = "<group>"; };
+		A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPClient.m; sourceTree = "<group>"; };
 		A979A5CB1C6B4AA4003DD37C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A97D88921C5557D500428FC7 /* P2PSP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P2PSP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97D88961C5557D500428FC7 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 		A9DC89691C7B2FDA00151F87 /* network */ = {
 			isa = PBXGroup;
 			children = (
+				A9316CA91C9AEEAD005BD61C /* HTTPClient.h */,
+				A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */,
 				A9DC89661C7B2FD300151F87 /* BocastClient.h */,
 				A9DC89671C7B2FD300151F87 /* BocastClient.m */,
 			);
@@ -364,7 +369,7 @@
 				TargetAttributes = {
 					A97D88911C5557D500428FC7 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = CYEHN3VAPF;
+						DevelopmentTeam = 7K635S7277;
 					};
 					A97D88AA1C5557D600428FC7 = {
 						CreatedOnToolsVersion = 7.2;
@@ -437,6 +442,7 @@
 				A90F96C81C9AE2FC00BC02AA /* VideoRecorder.m in Sources */,
 				CFD663AD1C9AD1AB0036638E /* CameraController.m in Sources */,
 				A994296B1C768ADF00CAD774 /* ChannelsController.m in Sources */,
+				A9316CAB1C9AEEAD005BD61C /* HTTPClient.m in Sources */,
 				A97D889A1C5557D500428FC7 /* AppDelegate.m in Sources */,
 				A9FE90231C56A38900C7C91C /* peer_ims.cc in Sources */,
 				A9FE90201C56A38900C7C91C /* monitor_dbs.cc in Sources */,
