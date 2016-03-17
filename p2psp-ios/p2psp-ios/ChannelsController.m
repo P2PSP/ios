@@ -111,6 +111,7 @@
                                  withDescription:@""
                                           withIP:@"127.0.0.1"
                                         withPort:@"4552"];
+    [vcPlayerController setChannel:self.selectedChannel];
 
     // Channel selected segue
   } else if ([segue.identifier isEqual:@"watchPlayerController"]) {
@@ -118,9 +119,9 @@
     NSIndexPath *indexPath = [self.tvChannelsList indexPathForCell:cell];
     long index = indexPath.row;
     self.selectedChannel = self.channelsList[index];
+    [vcPlayerController setChannel:self.selectedChannel];
+  } else if ([segue.identifier isEqual:@"showCameraController"]) {
   }
-
-  [vcPlayerController setChannel:self.selectedChannel];
 }
 
 /**

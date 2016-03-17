@@ -36,6 +36,7 @@
 		A9FE90221C56A38900C7C91C /* peer_dbs.cc in Sources */ = {isa = PBXBuildFile; fileRef = A9FE901E1C56A38900C7C91C /* peer_dbs.cc */; };
 		A9FE90231C56A38900C7C91C /* peer_ims.cc in Sources */ = {isa = PBXBuildFile; fileRef = A9FE901F1C56A38900C7C91C /* peer_ims.cc */; };
 		A9FE90251C56A39E00C7C91C /* trace.cc in Sources */ = {isa = PBXBuildFile; fileRef = A9FE90241C56A39E00C7C91C /* trace.cc */; };
+		CFD663AD1C9AD1AB0036638E /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD663AC1C9AD1AB0036638E /* CameraController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		A9FE901E1C56A38900C7C91C /* peer_dbs.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = peer_dbs.cc; path = ../lib/p2psp/src/core/peer_dbs.cc; sourceTree = "<group>"; };
 		A9FE901F1C56A38900C7C91C /* peer_ims.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = peer_ims.cc; path = ../lib/p2psp/src/core/peer_ims.cc; sourceTree = "<group>"; };
 		A9FE90241C56A39E00C7C91C /* trace.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace.cc; path = ../lib/p2psp/src/util/trace.cc; sourceTree = "<group>"; };
+		CFD663AB1C9AD1AB0036638E /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
+		CFD663AC1C9AD1AB0036638E /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +209,8 @@
 			children = (
 				A99429691C768ADF00CAD774 /* ChannelsController.h */,
 				A994296A1C768ADF00CAD774 /* ChannelsController.m */,
+				CFD663AB1C9AD1AB0036638E /* CameraController.h */,
+				CFD663AC1C9AD1AB0036638E /* CameraController.m */,
 				A97D889B1C5557D500428FC7 /* PlayerController.h */,
 				A97D889C1C5557D500428FC7 /* PlayerController.mm */,
 			);
@@ -407,6 +412,7 @@
 				A97D889D1C5557D500428FC7 /* PlayerController.mm in Sources */,
 				A994296E1C768C3200CAD774 /* Channel.m in Sources */,
 				A9FE90251C56A39E00C7C91C /* trace.cc in Sources */,
+				CFD663AD1C9AD1AB0036638E /* CameraController.m in Sources */,
 				A994296B1C768ADF00CAD774 /* ChannelsController.m in Sources */,
 				A97D889A1C5557D500428FC7 /* AppDelegate.m in Sources */,
 				A9FE90231C56A38900C7C91C /* peer_ims.cc in Sources */,
