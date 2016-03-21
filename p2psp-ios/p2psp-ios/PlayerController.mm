@@ -385,9 +385,7 @@ BOOL isFullScreen = NO;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  if ([segue.identifier isEqual:@"backToChannelController"]) {
-    [self stop];
-  }
+  [self stop];
 }
 
 @end

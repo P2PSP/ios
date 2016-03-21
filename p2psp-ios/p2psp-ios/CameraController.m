@@ -166,4 +166,9 @@
 - (void)setServerAddress:(NSString *)address {
   self.address = address;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  [self.videoRecorder stopRecording];
+}
+
 @end
