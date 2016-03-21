@@ -12,6 +12,7 @@
 		A90F96CD1C9AE41800BC02AA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A90F96CC1C9AE41800BC02AA /* MobileCoreServices.framework */; };
 		A9316CAB1C9AEEAD005BD61C /* HTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */; };
 		A9316CAD1CA01868005BD61C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A9316CAC1CA01868005BD61C /* Settings.bundle */; };
+		A9316CB01CA0383D005BD61C /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9316CAF1CA0383D005BD61C /* NavigationController.m */; };
 		A979A5CC1C6B4AA4003DD37C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A979A5CB1C6B4AA4003DD37C /* Default-568h@2x.png */; };
 		A97D88971C5557D500428FC7 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A97D88961C5557D500428FC7 /* main.mm */; };
 		A97D889A1C5557D500428FC7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A97D88991C5557D500428FC7 /* AppDelegate.m */; };
@@ -69,6 +70,8 @@
 		A9316CA91C9AEEAD005BD61C /* HTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPClient.h; sourceTree = "<group>"; };
 		A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPClient.m; sourceTree = "<group>"; };
 		A9316CAC1CA01868005BD61C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		A9316CAE1CA0383D005BD61C /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		A9316CAF1CA0383D005BD61C /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		A979A5CB1C6B4AA4003DD37C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A97D88921C5557D500428FC7 /* P2PSP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P2PSP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97D88961C5557D500428FC7 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 		A994296F1C76902100CAD774 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				A9316CAE1CA0383D005BD61C /* NavigationController.h */,
+				A9316CAF1CA0383D005BD61C /* NavigationController.m */,
 				A99429691C768ADF00CAD774 /* ChannelsController.h */,
 				A994296A1C768ADF00CAD774 /* ChannelsController.m */,
 				CFD663AB1C9AD1AB0036638E /* CameraController.h */,
@@ -443,6 +448,7 @@
 				A97D889D1C5557D500428FC7 /* PlayerController.mm in Sources */,
 				A994296E1C768C3200CAD774 /* Channel.m in Sources */,
 				A9FE90251C56A39E00C7C91C /* trace.cc in Sources */,
+				A9316CB01CA0383D005BD61C /* NavigationController.m in Sources */,
 				A90F96C81C9AE2FC00BC02AA /* VideoRecorder.m in Sources */,
 				CFD663AD1C9AD1AB0036638E /* CameraController.m in Sources */,
 				A994296B1C768ADF00CAD774 /* ChannelsController.m in Sources */,

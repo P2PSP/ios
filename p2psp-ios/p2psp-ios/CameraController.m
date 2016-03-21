@@ -27,6 +27,11 @@
 @implementation CameraController
 
 - (void)viewDidLoad {
+  [[UIDevice currentDevice]
+   setValue:[NSNumber numberWithInt:UIInterfaceOrientationPortrait]
+   forKey:@"orientation"];
+
+  
   // Set toolbars transparent
   [self.tbClose setBackgroundImage:[UIImage new]
                 forToolbarPosition:UIBarPositionAny
@@ -65,6 +70,9 @@
   self.mediaSender = [[HTTPClient alloc] init];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+}
+
 /**
  *  System override function to specify when should the status bar be hidden
  *
@@ -100,10 +108,13 @@
                                                           self.address]]];
       });
 
-  [_videoRecorder startRecordingForDropFileWithSeconds:1
-                                             frameRate:30
-                                          captureWidth:self.vCameraPreviewContainer.bounds.size.width
-                                         captureHeight:self.vCameraPreviewContainer.bounds.size.height];
+  [_videoRecorder
+      startRecordingForDropFileWithSeconds:1
+                                 frameRate:30
+                              captureWidth:self.vCameraPreviewContainer.bounds
+                                               .size.width
+                             captureHeight:self.vCameraPreviewContainer.bounds
+                                               .size.height];
   [self.vCameraPreviewContainer addSubview:[_videoRecorder preview]];
 }
 
@@ -169,6 +180,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   [self.videoRecorder stopRecording];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+  return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

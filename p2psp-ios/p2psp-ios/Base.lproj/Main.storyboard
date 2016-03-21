@@ -443,7 +443,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uFs-jK-IqS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T1A-qP-LVW" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T1A-qP-LVW" customClass="NavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="nWp-NI-Gef">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
