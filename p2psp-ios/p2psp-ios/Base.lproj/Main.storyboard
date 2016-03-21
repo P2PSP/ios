@@ -165,9 +165,13 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58l-kl-Umu">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58l-kl-Umu" userLabel="Wrapper container">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rvm-uD-j0O">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="qbP-9S-pvb">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <items>
@@ -187,12 +191,15 @@
                                         </items>
                                     </toolbar>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qbP-9S-pvb" secondAttribute="trailing" id="GhF-Vx-Z6U"/>
                                     <constraint firstItem="qbP-9S-pvb" firstAttribute="leading" secondItem="58l-kl-Umu" secondAttribute="leading" id="KEk-Ic-UCO"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rvm-uD-j0O" secondAttribute="bottom" id="LUn-OP-Nf2"/>
                                     <constraint firstItem="qbP-9S-pvb" firstAttribute="top" secondItem="58l-kl-Umu" secondAttribute="top" id="MaW-AJ-zhC"/>
                                     <constraint firstAttribute="trailing" secondItem="sQ1-m3-a26" secondAttribute="trailing" id="NZ0-zN-cmu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rvm-uD-j0O" secondAttribute="trailing" id="PJm-Dk-We5"/>
+                                    <constraint firstItem="Rvm-uD-j0O" firstAttribute="leading" secondItem="58l-kl-Umu" secondAttribute="leading" id="Rik-Ur-KMp"/>
+                                    <constraint firstItem="Rvm-uD-j0O" firstAttribute="top" secondItem="58l-kl-Umu" secondAttribute="top" id="f25-GD-bMB"/>
                                     <constraint firstAttribute="bottom" secondItem="sQ1-m3-a26" secondAttribute="bottom" id="kDt-Vg-qgH"/>
                                     <constraint firstItem="sQ1-m3-a26" firstAttribute="leading" secondItem="58l-kl-Umu" secondAttribute="leading" id="uMT-CX-aOm"/>
                                 </constraints>
@@ -210,7 +217,7 @@
                     <connections>
                         <outlet property="tbClose" destination="qbP-9S-pvb" id="a9K-VJ-AMz"/>
                         <outlet property="tbRecord" destination="sQ1-m3-a26" id="dpH-H2-k4H"/>
-                        <outlet property="vCameraPreviewContainer" destination="58l-kl-Umu" id="GpI-cV-6Px"/>
+                        <outlet property="vCameraPreviewContainer" destination="Rvm-uD-j0O" id="bz5-fq-0Hs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D3-LX-hDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
