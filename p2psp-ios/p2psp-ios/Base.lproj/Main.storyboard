@@ -127,7 +127,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Channels" id="X7P-xw-XJg">
-                        <barButtonItem key="leftBarButtonItem" title="Capture" id="38g-I8-RGY">
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="38g-I8-RGY">
                             <connections>
                                 <segue destination="zhm-d7-VLe" kind="show" identifier="showCameraController" id="5Or-2n-dIR"/>
                             </connections>

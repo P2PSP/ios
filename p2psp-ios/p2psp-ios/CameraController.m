@@ -28,10 +28,9 @@
 
 - (void)viewDidLoad {
   [[UIDevice currentDevice]
-   setValue:[NSNumber numberWithInt:UIInterfaceOrientationPortrait]
-   forKey:@"orientation"];
+      setValue:[NSNumber numberWithInt:UIInterfaceOrientationPortrait]
+        forKey:@"orientation"];
 
-  
   // Set toolbars transparent
   [self.tbClose setBackgroundImage:[UIImage new]
                 forToolbarPosition:UIBarPositionAny
@@ -65,12 +64,17 @@
   [self updateBarButtonItem:self.bbiRecord inToolbar:self.tbRecord];
 
   // Setup video recorder and http client
-  _videoRecorder = [[VideoRecorder alloc] init];
-  [_videoRecorder setDelegate:self];
   self.mediaSender = [[HTTPClient alloc] init];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
+  _videoRecorder = [[VideoRecorder alloc]
+      initWithWidth:self.view.bounds.size.width
+          andHeight:self.view.bounds.size.height];
+  [_videoRecorder setDelegate:self];
+    _videoRecorder.preview.frame = self.vCameraPreviewContainer.bounds;
+  [self.vCameraPreviewContainer addSubview:[_videoRecorder preview]];
+
 }
 
 /**
@@ -115,7 +119,6 @@
                                                .size.width
                              captureHeight:self.vCameraPreviewContainer.bounds
                                                .size.height];
-  [self.vCameraPreviewContainer addSubview:[_videoRecorder preview]];
 }
 
 - (IBAction)onStop:(id)sender {
@@ -182,7 +185,7 @@
   [self.videoRecorder stopRecording];
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   return UIInterfaceOrientationMaskPortrait;
 }
 

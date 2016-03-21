@@ -6,13 +6,13 @@
 //  Copyright © 2016 P2PSP. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreMedia/CoreMedia.h>
 #import <CoreVideo/CoreVideo.h>
 #import <Foundation/Foundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <UIKit/UIKit.h>
 
 #define MAX_RECORDING_SECOND 86400
 
@@ -25,6 +25,8 @@
 @property(nonatomic) BOOL isRecording;
 @property(nonatomic) UIView* preview;
 @property(nonatomic, weak) id<VideoRecorderDelegate> delegate;
+
+- (id)initWithWidth:(uint)width andHeight:(uint)height;
 
 - (BOOL)startRecording;
 - (BOOL)startRecordingForDropFileWithSeconds:(uint)sec

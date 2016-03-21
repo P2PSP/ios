@@ -44,43 +44,46 @@
 
 @implementation VideoRecorder
 
-- (id)init {
+- (id)initWithWidth:(uint)width andHeight:(uint)height {
   self = [super init];
-  
+
   if (self != nil) {
     self.referenceOrientation = UIDeviceOrientationPortrait;
-    
-    [self initCaptureSession];
+
+    [self initCaptureSessionWithWidth:width andHeight:height];
   }
-  
+
   return self;
 }
 
-- (void)initCaptureSession {
+- (void)initCaptureSessionWithWidth:(uint)width andHeight:(uint)height {
+  self.captureWidth = width;
+  self.captureHeight = height;
+
   NSError* error;
   // Setup the video input
   AVCaptureDevice* videoDevice =
-  [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+      [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
   // Create a device input with the device and add it to the session.
   AVCaptureDeviceInput* videoInput =
-  [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+      [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
   // Setup the video output
   self.videoOutput = [[AVCaptureVideoDataOutput alloc] init];
   self.videoOutput.alwaysDiscardsLateVideoFrames = NO;
   self.videoOutput.videoSettings = [NSDictionary
-                                    dictionaryWithObject:
-                                    [NSNumber
-                                     numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange]
-                                    forKey:(id)kCVPixelBufferPixelFormatTypeKey];
-  
+      dictionaryWithObject:
+          [NSNumber
+              numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange]
+                    forKey:(id)kCVPixelBufferPixelFormatTypeKey];
+
   // Setup the audio input
   AVCaptureDevice* audioDevice =
-  [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+      [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
   AVCaptureDeviceInput* audioInput =
-  [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+      [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
   // Setup the audio output
   self.audioOutput = [[AVCaptureAudioDataOutput alloc] init];
-  
+
   // Create the session
   self.captureSession = [[AVCaptureSession alloc] init];
   [self.captureSession addInput:videoInput];
@@ -88,21 +91,30 @@
   [self.captureSession addOutput:self.videoOutput];
   [self.captureSession addOutput:self.audioOutput];
   self.videoConnection =
-  [self.videoOutput connectionWithMediaType:AVMediaTypeVideo];
+      [self.videoOutput connectionWithMediaType:AVMediaTypeVideo];
   self.audioConnection =
-  [self.audioOutput connectionWithMediaType:AVMediaTypeAudio];
-  
+      [self.audioOutput connectionWithMediaType:AVMediaTypeAudio];
+
   self.captureSession.sessionPreset = AVCaptureSessionPreset640x480;
-  
+
   // Setup the queue
   dispatch_queue_t queue = dispatch_queue_create("MyQueue", NULL);
   [self.videoOutput setSampleBufferDelegate:self queue:queue];
   [self.audioOutput setSampleBufferDelegate:self queue:queue];
-  
+
   self.videoOrientation = [self.videoConnection videoOrientation];
-  
+
   /*We start the capture*/
   [self.captureSession startRunning];
+
+  // set preview
+  self.preview = [[UIView alloc]
+      initWithFrame:CGRectMake(0, 0, self.captureWidth, self.captureHeight)];
+  self.prevLayer =
+      [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
+  self.prevLayer.frame = self.preview.layer.bounds;
+  self.prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+  [self.preview.layer addSublayer:self.prevLayer];
 }
 
 - (void)initVideoSettings {
@@ -111,18 +123,18 @@
                               // AVCaptureSessionPresetHigh.
   int bitPerSecond = self.captureWidth * self.captureHeight * bitsPerPixel;
   self.videoCompressionProps = [[NSDictionary alloc]
-                                initWithObjectsAndKeys:[NSNumber numberWithDouble:bitPerSecond],
-                                AVVideoAverageBitRateKey,
-                                [NSNumber numberWithInteger:self.frameRate],
-                                AVVideoMaxKeyFrameIntervalKey, nil];
-  
+      initWithObjectsAndKeys:[NSNumber numberWithDouble:bitPerSecond],
+                             AVVideoAverageBitRateKey,
+                             [NSNumber numberWithInteger:self.frameRate],
+                             AVVideoMaxKeyFrameIntervalKey, nil];
+
   self.videoSettings = [NSDictionary
-                        dictionaryWithObjectsAndKeys:AVVideoCodecH264, AVVideoCodecKey,
-                        [NSNumber numberWithInt:self.captureWidth],
-                        AVVideoWidthKey,
-                        [NSNumber numberWithInt:self.captureHeight],
-                        AVVideoHeightKey, self.videoCompressionProps,
-                        AVVideoCompressionPropertiesKey, nil];
+      dictionaryWithObjectsAndKeys:AVVideoCodecH264, AVVideoCodecKey,
+                                   [NSNumber numberWithInt:self.captureWidth],
+                                   AVVideoWidthKey,
+                                   [NSNumber numberWithInt:self.captureHeight],
+                                   AVVideoHeightKey, self.videoCompressionProps,
+                                   AVVideoCompressionPropertiesKey, nil];
 }
 
 - (void)initAudioSettings {
@@ -131,30 +143,30 @@
   bzero(&acl, sizeof(acl));
   // acl.mChannelLayoutTag = kAudioChannelLayoutTag_Mono;
   acl.mChannelLayoutTag = kAudioChannelLayoutTag_Stereo;
-  
+
   self.audioSettings = nil;
   self.audioSettings = [[NSDictionary alloc]
-                        initWithObjectsAndKeys:[NSNumber numberWithInt:kAudioFormatMPEG4AAC],
-                        AVFormatIDKey, [NSNumber numberWithInt:2],
-                        AVNumberOfChannelsKey,
-                        [NSNumber numberWithFloat:44100.0],
-                        AVSampleRateKey, [NSNumber numberWithInt:64000],
-                        AVEncoderBitRateKey,
-                        [NSData dataWithBytes:&acl length:sizeof(acl)],
-                        AVChannelLayoutKey, nil];
+      initWithObjectsAndKeys:[NSNumber numberWithInt:kAudioFormatMPEG4AAC],
+                             AVFormatIDKey, [NSNumber numberWithInt:2],
+                             AVNumberOfChannelsKey,
+                             [NSNumber numberWithFloat:44100.0],
+                             AVSampleRateKey, [NSNumber numberWithInt:64000],
+                             AVEncoderBitRateKey,
+                             [NSData dataWithBytes:&acl length:sizeof(acl)],
+                             AVChannelLayoutKey, nil];
 }
 
 - (NSURL*)outputVideoURL {
   static int index = 0;
-  
+
   return
-  [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@video_%d%@",
-                          NSTemporaryDirectory(),
-                          index++, @".mp4"]];
+      [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@video_%d%@",
+                                                        NSTemporaryDirectory(),
+                                                        index++, @".mp4"]];
 }
 
 - (CGFloat)angleOffsetFromPortraitOrientationToOrientation:
-(AVCaptureVideoOrientation)orientation {
+    (AVCaptureVideoOrientation)orientation {
   switch (orientation) {
     case AVCaptureVideoOrientationPortrait:
       return 0.0;
@@ -167,58 +179,58 @@
     default:
       break;
   }
-  
+
   return 0.0;
 }
 
 - (CGAffineTransform)transformFromCurrentVideoOrientationToOrientation:
-(AVCaptureVideoOrientation)orientation {
+    (AVCaptureVideoOrientation)orientation {
   CGAffineTransform transform = CGAffineTransformIdentity;
-  
+
   // Calculate offsets from an arbitrary reference orientation (portrait)
   CGFloat orientationAngleOffset =
-  [self angleOffsetFromPortraitOrientationToOrientation:orientation];
+      [self angleOffsetFromPortraitOrientationToOrientation:orientation];
   CGFloat videoOrientationAngleOffset = [self
-                                         angleOffsetFromPortraitOrientationToOrientation:self.videoOrientation];
-  
+      angleOffsetFromPortraitOrientationToOrientation:self.videoOrientation];
+
   // Find the difference in angle between the passed in orientation and the
   // current video orientation
   CGFloat angleOffset = orientationAngleOffset - videoOrientationAngleOffset;
   transform = CGAffineTransformMakeRotation(angleOffset);
-  
+
   return transform;
 }
 
 - (BOOL)setupCurrentVideoWriter {
   NSError* error = nil;
   NSURL* outputVideoURL = [self outputVideoURL];
-  
+
   self.currentVideoWriter = [[AVAssetWriter alloc] initWithURL:outputVideoURL
                                                       fileType:AVFileTypeMPEG4
                                                          error:&error];
   NSParameterAssert(self.currentVideoWriter);
   [self.currentVideoWriter setMovieTimeScale:0];
   [self.currentVideoWriter setShouldOptimizeForNetworkUse:YES];
-  
+
   self.currentVideoWriterInput =
-  [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo
-                                 outputSettings:self.videoSettings];
+      [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo
+                                     outputSettings:self.videoSettings];
   NSParameterAssert(self.currentVideoWriterInput);
   [self.currentVideoWriterInput setMediaTimeScale:0];
   self.currentVideoWriterInput.expectsMediaDataInRealTime = YES;
   self.currentVideoWriterInput.transform =
-  [self transformFromCurrentVideoOrientationToOrientation:
-   self.referenceOrientation];
-  
+      [self transformFromCurrentVideoOrientationToOrientation:
+                self.referenceOrientation];
+
   self.currentAudioWriterInput =
-  [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeAudio
-                                 outputSettings:self.audioSettings];
+      [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeAudio
+                                     outputSettings:self.audioSettings];
   self.currentAudioWriterInput.expectsMediaDataInRealTime = YES;
-  
+
   // add input
   [self.currentVideoWriter addInput:self.currentVideoWriterInput];
   [self.currentVideoWriter addInput:self.currentAudioWriterInput];
-  
+
   return YES;
 }
 
@@ -231,26 +243,26 @@
   NSParameterAssert(self.standbyVideoWriter);
   [self.standbyVideoWriter setMovieTimeScale:0];
   [self.standbyVideoWriter setShouldOptimizeForNetworkUse:YES];
-  
+
   self.standbyVideoWriterInput =
-  [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo
-                                 outputSettings:self.videoSettings];
+      [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo
+                                     outputSettings:self.videoSettings];
   NSParameterAssert(self.standbyVideoWriterInput);
-  
+
   self.standbyVideoWriterInput.expectsMediaDataInRealTime = YES;
   self.standbyVideoWriterInput.transform =
-  [self transformFromCurrentVideoOrientationToOrientation:
-   self.referenceOrientation];
-  
+      [self transformFromCurrentVideoOrientationToOrientation:
+                self.referenceOrientation];
+
   self.standbyAudioWriterInput =
-  [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeAudio
-                                 outputSettings:self.audioSettings];
+      [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeAudio
+                                     outputSettings:self.audioSettings];
   self.standbyAudioWriterInput.expectsMediaDataInRealTime = YES;
-  
+
   // add input
   [self.standbyVideoWriter addInput:self.standbyVideoWriterInput];
   [self.standbyVideoWriter addInput:self.standbyAudioWriterInput];
-  
+
   return YES;
 }
 
@@ -258,7 +270,7 @@
   self.currentVideoWriter = self.standbyVideoWriter;
   self.currentVideoWriterInput = self.standbyVideoWriterInput;
   self.currentAudioWriterInput = self.standbyAudioWriterInput;
-  
+
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                  ^{
                    [self setupStandbyVideoWriter];
@@ -273,7 +285,7 @@
         NSLog(@"Error: %@", self.currentVideoWriter.error);
       return;
     }
-    
+
     if (self.currentVideoWriterInput.readyForMoreMediaData == YES) {
       if (![self.currentVideoWriterInput appendSampleBuffer:sampleBuffer])
         NSLog(@"Unable to write to video input");
@@ -291,7 +303,7 @@
         NSLog(@"Error: %@", self.currentVideoWriter.error);
       return;
     }
-    
+
     if (self.currentAudioWriterInput.readyForMoreMediaData == YES) {
       if (![self.currentAudioWriterInput appendSampleBuffer:sampleBuffer])
         NSLog(@"Unable to write to audio input");
@@ -302,32 +314,32 @@
 }
 
 - (void)captureOutput:(AVCaptureOutput*)captureOutput
-didVideoOutputSampleBuffer:(CMSampleBufferRef)sampleBufferOrg
-       fromConnection:(AVCaptureConnection*)connection {
+    didVideoOutputSampleBuffer:(CMSampleBufferRef)sampleBufferOrg
+                fromConnection:(AVCaptureConnection*)connection {
   if (!CMSampleBufferDataIsReady(sampleBufferOrg)) {
     NSLog(@"sample buffer is not ready. Skipping sample");
     return;
   }
-  
+
   CMSampleBufferRef sampleBuffer;
   CMSampleTimingInfo timingInfo;
   CMSampleBufferGetSampleTimingInfo(sampleBufferOrg, 0, &timingInfo);
-  
+
   CMTime pts = timingInfo.presentationTimeStamp;
   timingInfo.duration = CMTimeMake(pts.timescale / 30, pts.timescale);
   CMSampleBufferCreateCopyWithNewTiming(kCFAllocatorDefault, sampleBufferOrg, 1,
                                         &timingInfo, &sampleBuffer);
-  
+
   CMTime videoSampleTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
-  
+
   if ((videoSampleTime.value - self.lastVideoFileWriteSampleTime.value) <
-      (videoSampleTime.timescale * self.secondsForFileCut) ||
+          (videoSampleTime.timescale * self.secondsForFileCut) ||
       self.lastVideoFileWriteSampleTime.value == 0 /*first sample write*/) {
     if (self.currentVideoWriter.status != AVAssetWriterStatusWriting &&
         self.currentVideoWriter.status != AVAssetWriterStatusFailed) {
       if ([self.currentVideoWriter startWriting]) {
         self.lastVideoFileWriteSampleTime = videoSampleTime;
-        
+
         // Start new video
         [self.currentVideoWriter startSessionAtSourceTime:pts];
       }
@@ -338,42 +350,42 @@ didVideoOutputSampleBuffer:(CMSampleBufferRef)sampleBufferOrg
   } else {
     [self.currentVideoWriter finishWriting];
     [self.delegate videoRecorder:self
-recoringDidFinishToOutputFileURL:self.currentVideoWriter.outputURL
-                           error:nil];
-    
+        recoringDidFinishToOutputFileURL:self.currentVideoWriter.outputURL
+                                   error:nil];
+
     // Prepare new video file
     [self switchVideoWriter];
-    
+
     if (self.currentVideoWriter.status != AVAssetWriterStatusWriting &&
         self.currentVideoWriter.status != AVAssetWriterStatusFailed) {
       if ([self.currentVideoWriter startWriting]) {
         self.lastVideoFileWriteSampleTime = videoSampleTime;
-        
+
         // Start new video
         [self.currentVideoWriter startSessionAtSourceTime:pts];
       }
     }
-    
+
     // write sample
     if (self.currentVideoWriter.status == AVAssetWriterStatusWriting)
       [self onVideoSample:sampleBuffer];
   }
-  
+
   CFRelease(sampleBuffer);
 }
 
 - (void)captureOutput:(AVCaptureOutput*)captureOutput
-didAudioOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
-       fromConnection:(AVCaptureConnection*)connection {
+    didAudioOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
+                fromConnection:(AVCaptureConnection*)connection {
   if (!CMSampleBufferDataIsReady(sampleBuffer)) {
     NSLog(@"sample buffer is not ready. Skipping sample");
     return;
   }
-  
+
   CMTime audioSampleTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
-  
+
   if ((audioSampleTime.value - self.lastAudioFileWriteSampleTime.value) <
-      (audioSampleTime.timescale * self.secondsForFileCut) ||
+          (audioSampleTime.timescale * self.secondsForFileCut) ||
       self.lastAudioFileWriteSampleTime.value == 0 /*first sample write*/) {
     // write sample
     if (self.currentVideoWriter.status == AVAssetWriterStatusWriting)
@@ -393,12 +405,12 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
   if (self.isRecording) {
     if (captureOutput == self.videoOutput) {
       [self captureOutput:captureOutput
-didVideoOutputSampleBuffer:sampleBuffer
-           fromConnection:connection];
+          didVideoOutputSampleBuffer:sampleBuffer
+                      fromConnection:connection];
     } else if (captureOutput == self.audioOutput) {
       [self captureOutput:captureOutput
-didAudioOutputSampleBuffer:sampleBuffer
-           fromConnection:connection];
+          didAudioOutputSampleBuffer:sampleBuffer
+                      fromConnection:connection];
     }
   }
 }
@@ -423,31 +435,21 @@ didAudioOutputSampleBuffer:sampleBuffer
   if (self.isRecording) {
     return NO;
   }
-  
+
   self.secondsForFileCut = sec;
   self.frameRate = fRate;
   self.captureWidth = width;
   self.captureHeight = height;
-  
+
   self.videoConnection.videoMinFrameDuration = CMTimeMake(1, self.frameRate);
   self.videoConnection.videoMaxFrameDuration = CMTimeMake(1, self.frameRate);
-  
-  self.preview = [[UIView alloc]
-                  initWithFrame:CGRectMake(0, 0, self.captureWidth, self.captureHeight)];
-  
+
   [self initVideoSettings];
   [self initAudioSettings];
-  
+
   [self setupCurrentVideoWriter];
   [self setupStandbyVideoWriter];
-  
-  // set preview
-  self.prevLayer =
-  [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
-  self.prevLayer.frame = self.preview.layer.bounds;
-  self.prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-  [self.preview.layer addSublayer:self.prevLayer];
-  
+
   self.isRecording = YES;
   return YES;
 }
@@ -459,11 +461,11 @@ didAudioOutputSampleBuffer:sampleBuffer
   self.isRecording = NO;
   _lastVideoFileWriteSampleTime.value = 0;
   _lastAudioFileWriteSampleTime.value = 0;
-  
+
   [self.delegate videoRecorder:self
-recoringDidFinishToOutputFileURL:self.currentVideoWriter.outputURL
-                         error:self.currentVideoWriter.error];
-  
+      recoringDidFinishToOutputFileURL:self.currentVideoWriter.outputURL
+                                 error:self.currentVideoWriter.error];
+
   return YES;
 }
 
