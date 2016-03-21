@@ -29,6 +29,9 @@
 
   // Data model
   self.channelsList = [[NSMutableArray alloc] init];
+
+  self.tfServerAddress.text =
+      [[NSUserDefaults standardUserDefaults] stringForKey:@"server_address"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,8 +91,10 @@
 - (IBAction)onGetChannels:(id)sender {
   // TODO: Display loading icon
   NSString *address = self.tfServerAddress.text;
-  NSString *url = [NSString
-      stringWithFormat:@"%@%@%@", @"http://", address, @"/api/channels"];
+  NSString *url =
+      [NSString stringWithFormat:@"http://%@/api/channels", address];
+
+  [self updateUserDefaultsKey:@"server_address" withValue:address];
 
   self.bocastClient.bocastURL = [NSURL URLWithString:url];
   [self.bocastClient requestChannelsList];
@@ -124,6 +129,8 @@
   } else if ([segue.identifier isEqual:@"showCameraController"]) {
     [((CameraController *)vcNextViewController)
         setServerAddress:[self.tfServerAddress text]];
+    [self updateUserDefaultsKey:@"server_address"
+                      withValue:self.tfServerAddress.text];
   }
 }
 
@@ -178,6 +185,19 @@
     [self.tvChannelsList reloadSections:[NSIndexSet indexSetWithIndex:0]
                        withRowAnimation:UITableViewRowAnimationFade];
   });
+}
+
+/**
+ *  Update the user preferences automatically
+ *
+ *  @param key   The settings key
+ *  @param value The value
+ */
+- (void)updateUserDefaultsKey:(NSString *)key withValue:(NSString *)value {
+  if (![[[NSUserDefaults standardUserDefaults] stringForKey:key]
+          isEqualToString:value]) {
+    [[NSUserDefaults standardUserDefaults] setValue:value forKey:key];
+  }
 }
 
 @end

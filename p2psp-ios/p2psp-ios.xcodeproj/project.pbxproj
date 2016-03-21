@@ -11,6 +11,7 @@
 		A90F96CB1C9AE41100BC02AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A90F96CA1C9AE41100BC02AA /* Foundation.framework */; };
 		A90F96CD1C9AE41800BC02AA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A90F96CC1C9AE41800BC02AA /* MobileCoreServices.framework */; };
 		A9316CAB1C9AEEAD005BD61C /* HTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */; };
+		A9316CAD1CA01868005BD61C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A9316CAC1CA01868005BD61C /* Settings.bundle */; };
 		A979A5CC1C6B4AA4003DD37C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A979A5CB1C6B4AA4003DD37C /* Default-568h@2x.png */; };
 		A97D88971C5557D500428FC7 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = A97D88961C5557D500428FC7 /* main.mm */; };
 		A97D889A1C5557D500428FC7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A97D88991C5557D500428FC7 /* AppDelegate.m */; };
@@ -67,6 +68,7 @@
 		A90F96CC1C9AE41800BC02AA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A9316CA91C9AEEAD005BD61C /* HTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPClient.h; sourceTree = "<group>"; };
 		A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPClient.m; sourceTree = "<group>"; };
+		A9316CAC1CA01868005BD61C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A979A5CB1C6B4AA4003DD37C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A97D88921C5557D500428FC7 /* P2PSP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P2PSP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A97D88961C5557D500428FC7 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				A97D889E1C5557D500428FC7 /* Main.storyboard */,
 				A97D88A11C5557D500428FC7 /* Assets.xcassets */,
 				A97D88A31C5557D500428FC7 /* LaunchScreen.storyboard */,
+				A9316CAC1CA01868005BD61C /* Settings.bundle */,
 				A97D88A61C5557D500428FC7 /* Info.plist */,
 				A9FE90271C56A3C300C7C91C /* util */,
 				A9FE90281C56A3CD00C7C91C /* lib */,
@@ -408,6 +411,7 @@
 			files = (
 				A97D88A51C5557D500428FC7 /* LaunchScreen.storyboard in Resources */,
 				A979A5CC1C6B4AA4003DD37C /* Default-568h@2x.png in Resources */,
+				A9316CAD1CA01868005BD61C /* Settings.bundle in Resources */,
 				A97D88A21C5557D500428FC7 /* Assets.xcassets in Resources */,
 				A97D88A01C5557D500428FC7 /* Main.storyboard in Resources */,
 			);
