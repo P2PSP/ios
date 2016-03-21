@@ -102,8 +102,8 @@
 
   [_videoRecorder startRecordingForDropFileWithSeconds:1
                                              frameRate:30
-                                          captureWidth:640
-                                         captureHeight:480];
+                                          captureWidth:self.vCameraPreviewContainer.bounds.size.width
+                                         captureHeight:self.vCameraPreviewContainer.bounds.size.height];
   [self.vCameraPreviewContainer addSubview:[_videoRecorder preview]];
 }
 
