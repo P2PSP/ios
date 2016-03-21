@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BocastClient.h"
+#import "CameraController.h"
 #import "Channel.h"
 #import "PlayerController.h"
 

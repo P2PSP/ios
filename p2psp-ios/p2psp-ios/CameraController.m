@@ -20,6 +20,8 @@
 @property(nonatomic) HTTPClient *mediaSender;
 @property(nonatomic) VideoRecorder *videoRecorder;
 @property(nonatomic, weak) IBOutlet UIView *preview;
+
+@property(nonatomic) NSString *address;
 @end
 
 @implementation CameraController
@@ -93,7 +95,9 @@
       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.mediaSender
             createConnection:
-                [NSURL URLWithString:@"http://192.168.1.141:8080/api/emit"]];
+                [NSURL URLWithString:[NSString
+                                         stringWithFormat:@"http://%@/api/emit",
+                                                          self.address]]];
       });
 
   [_videoRecorder startRecordingForDropFileWithSeconds:1
@@ -130,11 +134,10 @@
                                error:(NSError *)error {
   NSLog(@"recording finished URL: %@", outputFileURL);
 
-  /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
-   0),
-   ^{
-   [self.mediaSender postVideo:outputFileURL];
-   });*/
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                 ^{
+                   [self.mediaSender postVideo:outputFileURL];
+                 });
 
   // [self saveToCameraRoll:outputFileURL];
 }
@@ -160,4 +163,7 @@
   }
 }
 
+- (void)setServerAddress:(NSString *)address {
+  self.address = address;
+}
 @end

@@ -12,4 +12,6 @@
 
 @interface CameraController : UIViewController<VideoRecorderDelegate>
 
+- (void)setServerAddress:(NSString*)address;
+
 @end

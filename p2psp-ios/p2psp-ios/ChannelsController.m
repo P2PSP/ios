@@ -102,8 +102,7 @@
  *  @param sender The UIView sender
  */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  PlayerController *vcPlayerController =
-      (PlayerController *)segue.destinationViewController;
+  UIViewController *vcNextViewController = segue.destinationViewController;
 
   // Debug splitter segue
   if ([segue.identifier isEqual:@"debugSplitter"]) {
@@ -111,7 +110,8 @@
                                  withDescription:@""
                                           withIP:@"127.0.0.1"
                                         withPort:@"4552"];
-    [vcPlayerController setChannel:self.selectedChannel];
+    [((PlayerController *)vcNextViewController)
+        setChannel:self.selectedChannel];
 
     // Channel selected segue
   } else if ([segue.identifier isEqual:@"watchPlayerController"]) {
@@ -119,8 +119,11 @@
     NSIndexPath *indexPath = [self.tvChannelsList indexPathForCell:cell];
     long index = indexPath.row;
     self.selectedChannel = self.channelsList[index];
-    [vcPlayerController setChannel:self.selectedChannel];
+    [((PlayerController *)vcNextViewController)
+        setChannel:self.selectedChannel];
   } else if ([segue.identifier isEqual:@"showCameraController"]) {
+    [((CameraController *)vcNextViewController)
+        setServerAddress:[self.tfServerAddress text]];
   }
 }
 
