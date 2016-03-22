@@ -68,13 +68,16 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  _videoRecorder = [[VideoRecorder alloc]
-      initWithWidth:self.view.bounds.size.width
-          andHeight:self.view.bounds.size.height];
-  [_videoRecorder setDelegate:self];
-    _videoRecorder.preview.frame = self.vCameraPreviewContainer.bounds;
-  [self.vCameraPreviewContainer addSubview:[_videoRecorder preview]];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+  // [UIView setAnimationsEnabled:YES];
+  _videoRecorder =
+      [[VideoRecorder alloc] initWithWidth:self.view.bounds.size.width
+                                 andHeight:self.view.bounds.size.height];
+  [_videoRecorder setDelegate:self];
+  _videoRecorder.preview.frame = self.vCameraPreviewContainer.bounds;
+  [self.vCameraPreviewContainer addSubview:[_videoRecorder preview]];
 }
 
 /**
@@ -187,6 +190,11 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+  // [UIView setAnimationsEnabled:NO];
+  return [super shouldAutorotate];
 }
 
 @end
