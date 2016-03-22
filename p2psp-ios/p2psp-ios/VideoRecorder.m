@@ -462,9 +462,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
   _lastVideoFileWriteSampleTime.value = 0;
   _lastAudioFileWriteSampleTime.value = 0;
 
-  [self.delegate videoRecorder:self
+  /*[self.delegate videoRecorder:self
       recoringDidFinishToOutputFileURL:self.currentVideoWriter.outputURL
-                                 error:self.currentVideoWriter.error];
+                                 error:self.currentVideoWriter.error];*/
 
   return YES;
 }

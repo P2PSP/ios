@@ -8,45 +8,43 @@
 
 #import "HTTPClient.h"
 
+@interface HTTPClient ()
+
+@property(nonatomic) NSMutableURLRequest *request;
+
+@end
+
 @implementation HTTPClient
 
-NSInputStream *inputStream;
-NSOutputStream *outputStream;
+- (instancetype)initWithServerAddress:(NSURL *)serverAddress {
+  self = [super init];
+  if (self) {
+    self.request = [NSMutableURLRequest requestWithURL:serverAddress];
+    [self.request setHTTPMethod:@"POST"];
 
-- (void)createConnection:(NSURL *)serverAddress {
-  NSMutableURLRequest *request =
-      [NSMutableURLRequest requestWithURL:serverAddress];
+    [self.request addValue:@"application/octet-stream"
+        forHTTPHeaderField:@"Content-Type"];
 
-  [request setHTTPMethod:@"POST"];
+    [self.request addValue:@"0" forHTTPHeaderField:@"Content-Length"];
+  }
+  return self;
+}
 
-  [request addValue:@"application/octet-stream"
-      forHTTPHeaderField:@"Content-Type"];
-  [request addValue:@"chunked" forHTTPHeaderField:@"Transfer-Encoding"];
+- (void)postVideo:(NSURL *)localFilelURL {
+  NSData *localFile = [NSData dataWithContentsOfURL:localFilelURL];
 
-  // Input/output stream binding
-  CFReadStreamRef readStream = NULL;
-  CFWriteStreamRef writeStream = NULL;
-  CFStreamCreateBoundPair(NULL, &readStream, &writeStream, 524288);
-  inputStream = CFBridgingRelease(readStream);
-  outputStream = CFBridgingRelease(writeStream);
-  [request setHTTPBodyStream:inputStream];
+  if ([localFile length] < 1) {
+    return;
+  }
 
-  [outputStream open];
+  [self.request setValue:[NSString stringWithFormat:@"%lu",
+                                                    (u_long)[localFile length]]
+      forHTTPHeaderField:@"Content-Length"];
+
+  [self.request setHTTPBody:localFile];
 
   NSURLConnection *conn =
-      [[NSURLConnection alloc] initWithRequest:request delegate:self];
-}
-
-- (void)postVideo:(NSURL *)locaFilelURL {
-  NSData *videoData = [NSData dataWithContentsOfURL:locaFilelURL];
-  [outputStream write:[videoData bytes] maxLength:[videoData length]];
-}
-
-- (void)closeConnetion {
-  uint8_t eof = EOF;
-  [outputStream write:&eof maxLength:sizeof(eof)];
-  [outputStream close];
-  [inputStream close];
+      [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
 }
 
 #pragma mark NSURLConnection Delegate Methods

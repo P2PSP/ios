@@ -64,19 +64,21 @@
   [self updateBarButtonItem:self.bbiRecord inToolbar:self.tbRecord];
 
   // Setup video recorder and http client
-  self.mediaSender = [[HTTPClient alloc] init];
+  self.mediaSender = [[HTTPClient alloc]
+      initWithServerAddress:
+          [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/emit",
+                                                          self.address]]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  // [UIView setAnimationsEnabled:YES];
-  _videoRecorder =
+  self.videoRecorder =
       [[VideoRecorder alloc] initWithWidth:self.view.bounds.size.width
                                  andHeight:self.view.bounds.size.height];
-  [_videoRecorder setDelegate:self];
-  _videoRecorder.preview.frame = self.vCameraPreviewContainer.bounds;
+  [self.videoRecorder setDelegate:self];
+  self.videoRecorder.preview.frame = self.vCameraPreviewContainer.bounds;
   [self.vCameraPreviewContainer addSubview:[_videoRecorder preview]];
 }
 
@@ -106,14 +108,14 @@
 
   [self deleteTempDirFile];
 
-  dispatch_async(
-      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self.mediaSender
-            createConnection:
-                [NSURL URLWithString:[NSString
-                                         stringWithFormat:@"http://%@/api/emit",
-                                                          self.address]]];
-      });
+  /*  dispatch_async(
+        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+          [self.mediaSender
+              createConnection:
+                  [NSURL URLWithString:[NSString
+                                           stringWithFormat:@"http://%@/api/emit",
+                                                            self.address]]];
+        });*/
 
   [_videoRecorder
       startRecordingForDropFileWithSeconds:1
@@ -190,11 +192,6 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   return UIInterfaceOrientationMaskPortrait;
-}
-
-- (BOOL)shouldAutorotate {
-  // [UIView setAnimationsEnabled:NO];
-  return [super shouldAutorotate];
 }
 
 @end

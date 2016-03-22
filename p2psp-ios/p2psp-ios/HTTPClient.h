@@ -11,8 +11,8 @@
 @interface HTTPClient
     : NSObject<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
-- (void)createConnection:(NSURL*)serverAddress;
-- (void)postVideo:(NSURL*)locaFilelURL;
+- (instancetype)initWithServerAddress:(NSURL *)serverAddress;
+- (void)postVideo:(NSURL *)localFilelURL;
 - (void)closeConnetion;
 
 @end
