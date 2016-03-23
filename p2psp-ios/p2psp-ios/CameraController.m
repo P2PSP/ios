@@ -153,10 +153,11 @@
                                error:(NSError *)error {
   NSLog(@"recording finished URL: %@", outputFileURL);
 
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-                 ^{
-                   [self.mediaSender postVideo:outputFileURL];
-                 });
+  dispatch_async(
+      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.mediaSender postVideo:outputFileURL];
+        [[NSFileManager defaultManager] removeItemAtPath:outputFileURL error:nil];
+      });
 
   // [self saveToCameraRoll:outputFileURL];
 }
