@@ -58,4 +58,9 @@
   // appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+  // TODO: Process input url
+  return YES;
+}
+
 @end
