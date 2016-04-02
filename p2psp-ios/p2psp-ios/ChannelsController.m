@@ -111,8 +111,8 @@
 
   // Debug splitter segue
   if ([segue.identifier isEqual:@"debugSplitter"]) {
-    self.selectedChannel = [[Channel alloc] init:@""
-                                 withDescription:@""
+    self.selectedChannel = [[Channel alloc] init:@"**DEBUG**"
+                                 withDescription:@"**DEBUG**"
                                           withIP:@"127.0.0.1"
                                         withPort:@"4552"];
     [((PlayerController *)vcNextViewController)

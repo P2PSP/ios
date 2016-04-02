@@ -114,7 +114,8 @@ BOOL isFullScreen = NO;
              name:UIDeviceOrientationDidChangeNotification
            object:[UIDevice currentDevice]];
 
-  if ([self.currentChannel.title isEqualToString:@""]) {
+  if ([self.currentChannel.title isEqualToString:@"**DEBUG**"] &&
+      [self.currentChannel.desc isEqualToString:@"**DEBUG**"]) {
     // Hide description box and show debug pannel
     self.vDescriptionBox.hidden = YES;
     self.vDebugSplitter.hidden = NO;
