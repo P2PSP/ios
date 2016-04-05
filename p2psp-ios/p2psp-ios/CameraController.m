@@ -231,4 +231,13 @@
   });
 }
 
+/**
+ *  Dismiss the kyeboard when user taps outside a textinput
+ *
+ *  @param sender The gesture input
+ */
+- (IBAction)onKeyboardDismiss:(id)sender {
+  [self.view endEditing:YES];
+}
+
 @end
