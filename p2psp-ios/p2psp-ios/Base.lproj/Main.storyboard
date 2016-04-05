@@ -314,6 +314,7 @@
                         <outlet property="tfChannelTitle" destination="8Uz-6g-H1w" id="u3j-a4-n6O"/>
                         <outlet property="tvChannelDescription" destination="7yX-Ls-1bB" id="ZSX-Zz-W6t"/>
                         <outlet property="vCameraPreviewContainer" destination="Rvm-uD-j0O" id="bz5-fq-0Hs"/>
+                        <outlet property="vChannelFormWrapper" destination="V4F-lT-uX8" id="6oy-lp-QBl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D3-LX-hDz" userLabel="First Responder" sceneMemberID="firstResponder"/>

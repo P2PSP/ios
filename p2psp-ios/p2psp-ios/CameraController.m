@@ -18,6 +18,7 @@
 @property(weak, nonatomic) IBOutlet UIView *vCameraPreviewContainer;
 @property(weak, nonatomic) IBOutlet UITextField *tfChannelTitle;
 @property(weak, nonatomic) IBOutlet UITextView *tvChannelDescription;
+@property(weak, nonatomic) IBOutlet UIView *vChannelFormWrapper;
 
 @property(nonatomic) HTTPClient *mediaSender;
 @property(nonatomic) VideoRecorder *videoRecorder;
@@ -209,7 +210,14 @@
   // TODO: Make http post with data
   // TODO: Display loading progress view
   // TODO: Wait for the http response (the channel ID to emit to)
-  // TODO: Hide wrapper form view
+  
+  // TODO: Add to the callback response of the http request
+  // Hide wrapper form view
+  CATransition *animation = [CATransition animation];
+  animation.type = kCATransitionFade;
+  animation.duration = 0.2;
+  [self.vChannelFormWrapper.layer addAnimation:animation forKey:nil];
+  [self.vChannelFormWrapper setHidden:YES];
 }
 
 @end
