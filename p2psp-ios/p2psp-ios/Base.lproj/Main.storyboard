@@ -263,6 +263,9 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8Sc-oG-gH6">
+                                                <rect key="frame" x="140" y="124" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="A2m-h8-1Uq" secondAttribute="trailing" constant="8" id="4mS-dr-3bO"/>
@@ -272,6 +275,7 @@
                                             <constraint firstItem="BYA-DN-XXo" firstAttribute="leading" secondItem="fBC-x7-caZ" secondAttribute="leading" constant="8" id="Ma0-nt-l41"/>
                                             <constraint firstItem="Qa6-Dz-XAm" firstAttribute="leading" secondItem="fBC-x7-caZ" secondAttribute="leading" constant="8" id="PQW-Fk-pUq"/>
                                             <constraint firstItem="cGz-26-hbX" firstAttribute="leading" secondItem="fBC-x7-caZ" secondAttribute="leading" constant="8" id="R6v-OB-cHv"/>
+                                            <constraint firstItem="8Sc-oG-gH6" firstAttribute="centerX" secondItem="fBC-x7-caZ" secondAttribute="centerX" id="UG3-BV-vCg"/>
                                             <constraint firstAttribute="bottom" secondItem="A2m-h8-1Uq" secondAttribute="bottom" constant="8" id="VdT-l4-h7p"/>
                                             <constraint firstItem="Qa6-Dz-XAm" firstAttribute="top" secondItem="cGz-26-hbX" secondAttribute="bottom" constant="19" id="Vep-cG-VX9"/>
                                             <constraint firstItem="maX-PI-ruV" firstAttribute="leading" secondItem="fBC-x7-caZ" secondAttribute="leading" constant="8" id="Wbm-Ci-0lL"/>
@@ -282,6 +286,7 @@
                                             <constraint firstItem="7yX-Ls-1bB" firstAttribute="top" secondItem="maX-PI-ruV" secondAttribute="bottom" constant="8" id="sfV-rr-r4J"/>
                                             <constraint firstAttribute="trailing" secondItem="7yX-Ls-1bB" secondAttribute="trailing" constant="8" id="u86-Aj-fqY"/>
                                             <constraint firstItem="8Uz-6g-H1w" firstAttribute="baseline" secondItem="Qa6-Dz-XAm" secondAttribute="baseline" id="uku-eN-gs7"/>
+                                            <constraint firstItem="8Sc-oG-gH6" firstAttribute="centerY" secondItem="fBC-x7-caZ" secondAttribute="centerY" id="vNr-5P-Rnc"/>
                                             <constraint firstItem="A2m-h8-1Uq" firstAttribute="top" secondItem="7yX-Ls-1bB" secondAttribute="bottom" constant="8" id="xvA-5E-pF6"/>
                                             <constraint firstItem="7yX-Ls-1bB" firstAttribute="leading" secondItem="fBC-x7-caZ" secondAttribute="leading" constant="8" id="yIm-RT-Pm7"/>
                                         </constraints>
@@ -309,6 +314,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Camera" id="8Yc-UZ-NQh"/>
                     <connections>
+                        <outlet property="aivHTTPLoadingIndicator" destination="8Sc-oG-gH6" id="BY2-yY-PqO"/>
                         <outlet property="tbClose" destination="qbP-9S-pvb" id="a9K-VJ-AMz"/>
                         <outlet property="tbRecord" destination="sQ1-m3-a26" id="dpH-H2-k4H"/>
                         <outlet property="tfChannelTitle" destination="8Uz-6g-H1w" id="u3j-a4-n6O"/>

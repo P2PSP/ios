@@ -19,6 +19,8 @@
 @property(weak, nonatomic) IBOutlet UITextField *tfChannelTitle;
 @property(weak, nonatomic) IBOutlet UITextView *tvChannelDescription;
 @property(weak, nonatomic) IBOutlet UIView *vChannelFormWrapper;
+@property(weak, nonatomic)
+    IBOutlet UIActivityIndicatorView *aivHTTPLoadingIndicator;
 
 @property(nonatomic) HTTPClient *mediaSender;
 @property(nonatomic) VideoRecorder *videoRecorder;
@@ -192,6 +194,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  // TODO: Remove channel from server before leaving this scene
   [self.videoRecorder stopRecording];
 }
 
@@ -208,16 +211,24 @@
 - (IBAction)onChannelOK:(id)sender {
   // TODO: Read and validate inputs views (title and description)
   // TODO: Make http post with data
-  // TODO: Display loading progress view
+  [self.aivHTTPLoadingIndicator startAnimating];
+  // TODO: Display and animate activity indicator view, and disable all inputs
+  // and OK button
   // TODO: Wait for the http response (the channel ID to emit to)
-  
+
   // TODO: Add to the callback response of the http request
-  // Hide wrapper form view
-  CATransition *animation = [CATransition animation];
-  animation.type = kCATransitionFade;
-  animation.duration = 0.2;
-  [self.vChannelFormWrapper.layer addAnimation:animation forKey:nil];
-  [self.vChannelFormWrapper setHidden:YES];
+  double delayInSeconds = 2.0;
+  dispatch_time_t popTime = dispatch_time(
+      DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+  dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+    // Hide wrapper form view
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.2;
+    [self.vChannelFormWrapper.layer addAnimation:animation forKey:nil];
+    [self.vChannelFormWrapper setHidden:YES];
+    [self.aivHTTPLoadingIndicator stopAnimating];
+  });
 }
 
 @end
