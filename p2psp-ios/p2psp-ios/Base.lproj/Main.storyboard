@@ -27,7 +27,9 @@
                                         <rect key="frame" x="519" y="9" width="41" height="34"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                        <state key="normal" title="Get"/>
+                                        <state key="normal" title="Get">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
                                         <connections>
                                             <action selector="onGetChannels:" destination="n6Z-7W-5so" eventType="touchDown" id="v5a-Eh-Odo"/>
                                         </connections>
@@ -329,6 +331,7 @@
                     <navigationItem key="navigationItem" title="Camera" id="8Yc-UZ-NQh"/>
                     <connections>
                         <outlet property="aivHTTPLoadingIndicator" destination="8Sc-oG-gH6" id="BY2-yY-PqO"/>
+                        <outlet property="bChannelOK" destination="A2m-h8-1Uq" id="hmq-94-wLS"/>
                         <outlet property="svChannelFormWrapper" destination="XNz-Dz-IVD" id="Mvn-Pd-znm"/>
                         <outlet property="tbClose" destination="qbP-9S-pvb" id="a9K-VJ-AMz"/>
                         <outlet property="tbRecord" destination="sQ1-m3-a26" id="dpH-H2-k4H"/>

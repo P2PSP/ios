@@ -22,6 +22,7 @@
 @property(weak, nonatomic) IBOutlet UIView *vChannelFormContainer;
 @property(weak, nonatomic)
     IBOutlet UIActivityIndicatorView *aivHTTPLoadingIndicator;
+@property(weak, nonatomic) IBOutlet UIButton *bChannelOK;
 
 @property(nonatomic) HTTPClient *mediaSender;
 @property(nonatomic) VideoRecorder *videoRecorder;
@@ -213,11 +214,18 @@
  */
 - (IBAction)onChannelOK:(id)sender {
   // TODO: Read and validate inputs views (title and description)
-  // TODO: Make http post with data
-  [self.aivHTTPLoadingIndicator startAnimating];
+
+  // Display and animate activity indicator, disable inputs
+  [self.tfChannelTitle setEnabled:NO];
+  [self.tvChannelDescription setEditable:NO];
+  [self.tvChannelDescription setSelectable:NO];
+  [self.tvChannelDescription setSelectable:NO];
+  [self.bChannelOK setEnabled:NO];
   [self.view endEditing:YES];
-  // TODO: Display and animate activity indicator view, and disable all inputs
-  // and OK button
+  [self.aivHTTPLoadingIndicator startAnimating];
+
+  // TODO: Make http post with data
+
   // TODO: Wait for the http response (the channel ID to emit to)
 
   // TODO: Add to the callback response of the http request
