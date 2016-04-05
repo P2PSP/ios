@@ -218,6 +218,9 @@
                                                 <state key="normal" title="Cancel">
                                                     <color key="titleColor" red="0.5908203125" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="TFy-dx-ZdJ" kind="unwind" unwindAction="unwindToChannels:" id="XpC-Mi-T1w"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2m-h8-1Uq">
                                                 <rect key="frame" x="255" y="226" width="37" height="34"/>
@@ -226,6 +229,9 @@
                                                 <state key="normal" title="OK">
                                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onChannelOK:" destination="zhm-d7-VLe" eventType="touchDown" id="IEV-hn-teu"/>
+                                                </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="7yX-Ls-1bB">
                                                 <rect key="frame" x="8" y="115" width="284" height="103"/>
@@ -305,6 +311,8 @@
                     <connections>
                         <outlet property="tbClose" destination="qbP-9S-pvb" id="a9K-VJ-AMz"/>
                         <outlet property="tbRecord" destination="sQ1-m3-a26" id="dpH-H2-k4H"/>
+                        <outlet property="tfChannelTitle" destination="8Uz-6g-H1w" id="u3j-a4-n6O"/>
+                        <outlet property="tvChannelDescription" destination="7yX-Ls-1bB" id="ZSX-Zz-W6t"/>
                         <outlet property="vCameraPreviewContainer" destination="Rvm-uD-j0O" id="bz5-fq-0Hs"/>
                     </connections>
                 </viewController>

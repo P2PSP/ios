@@ -16,6 +16,8 @@
 @property(nonatomic) IBOutlet UIBarButtonItem *bbiRecord;
 @property(nonatomic) IBOutlet UIBarButtonItem *bbiStop;
 @property(weak, nonatomic) IBOutlet UIView *vCameraPreviewContainer;
+@property(weak, nonatomic) IBOutlet UITextField *tfChannelTitle;
+@property(weak, nonatomic) IBOutlet UITextView *tvChannelDescription;
 
 @property(nonatomic) HTTPClient *mediaSender;
 @property(nonatomic) VideoRecorder *videoRecorder;
@@ -156,7 +158,8 @@
   dispatch_async(
       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.mediaSender postVideo:outputFileURL];
-        [[NSFileManager defaultManager] removeItemAtPath:outputFileURL error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:outputFileURL
+                                                   error:nil];
       });
 
   // [self saveToCameraRoll:outputFileURL];
@@ -193,6 +196,20 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   return UIInterfaceOrientationMaskPortrait;
+}
+
+/**
+ *  Trigered when OK button is pressed. Make an HTTP POST to server to add a new
+ * channel, and wait the response channel id
+ *
+ *  @param sender The OK button
+ */
+- (IBAction)onChannelOK:(id)sender {
+  // TODO: Read and validate inputs views (title and description)
+  // TODO: Make http post with data
+  // TODO: Display loading progress view
+  // TODO: Wait for the http response (the channel ID to emit to)
+  // TODO: Hide wrapper form view
 }
 
 @end
