@@ -16,6 +16,8 @@
 
 @property(weak, nonatomic) IBOutlet UITableView *tvChannelsList;
 @property(weak, nonatomic) IBOutlet UITextField *tfServerAddress;
+@property(weak, nonatomic)
+    IBOutlet UIActivityIndicatorView *aivLoadingChannelsList;
 
 @end
 
@@ -89,7 +91,8 @@
  *  @param sender The UIButton
  */
 - (IBAction)onGetChannels:(id)sender {
-  // TODO: Display loading icon
+  [self.aivLoadingChannelsList startAnimating];
+
   NSString *address = self.tfServerAddress.text;
   NSString *url =
       [NSString stringWithFormat:@"http://%@/api/channels", address];
@@ -159,8 +162,8 @@
  *  @param error The error object
  */
 - (void)onError:(NSError *)error {
-  // TODO: Hide loading icon
   dispatch_async(dispatch_get_main_queue(), ^{
+    [self.aivLoadingChannelsList stopAnimating];
     UIAlertView *alert =
         [[UIAlertView alloc] initWithTitle:@"Error"
                                    message:[error localizedDescription]
@@ -178,10 +181,10 @@
  *  @param channelsList The array of the channels
  */
 - (void)onChannelsListSuccess:(NSArray<Channel *> *)channelsList {
-  // TODO: Hide loading icon
   self.channelsList = channelsList;
 
   dispatch_async(dispatch_get_main_queue(), ^{
+    [self.aivLoadingChannelsList stopAnimating];
     [self.tvChannelsList reloadSections:[NSIndexSet indexSetWithIndex:0]
                        withRowAnimation:UITableViewRowAnimationFade];
   });

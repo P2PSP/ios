@@ -113,6 +113,9 @@
                                     <outlet property="delegate" destination="n6Z-7W-5so" id="Zxx-BO-fC1"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jCr-eW-yq7">
+                                <rect key="frame" x="290" y="283" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -122,6 +125,8 @@
                             <constraint firstItem="i8L-A3-MlV" firstAttribute="top" secondItem="kwp-Rs-Wn6" secondAttribute="bottom" id="NFT-6a-1Pi"/>
                             <constraint firstItem="bjV-yg-au4" firstAttribute="top" secondItem="i8L-A3-MlV" secondAttribute="bottom" id="TQQ-dR-yva"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kwp-Rs-Wn6" secondAttribute="trailing" id="Um7-6p-ih2"/>
+                            <constraint firstItem="jCr-eW-yq7" firstAttribute="centerY" secondItem="i8L-A3-MlV" secondAttribute="centerY" id="W1g-O0-fbG"/>
+                            <constraint firstItem="jCr-eW-yq7" firstAttribute="centerX" secondItem="i8L-A3-MlV" secondAttribute="centerX" id="ZMp-Aj-dNc"/>
                             <constraint firstItem="i8L-A3-MlV" firstAttribute="leading" secondItem="czq-8W-pys" secondAttribute="leadingMargin" id="tDT-Zv-ncN"/>
                             <constraint firstItem="kwp-Rs-Wn6" firstAttribute="leading" secondItem="czq-8W-pys" secondAttribute="leadingMargin" id="yfG-eh-sy0"/>
                         </constraints>
@@ -143,6 +148,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="aivLoadingChannelsList" destination="jCr-eW-yq7" id="mNa-qg-ItF"/>
                         <outlet property="tfServerAddress" destination="ctv-Ec-1fU" id="upd-Ku-Ict"/>
                         <outlet property="tvChannelsList" destination="i8L-A3-MlV" id="Xso-H4-Z8X"/>
                     </connections>
