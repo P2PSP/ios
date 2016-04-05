@@ -205,9 +205,14 @@
                                     <constraint firstItem="sQ1-m3-a26" firstAttribute="leading" secondItem="58l-kl-Umu" secondAttribute="leading" id="uMT-CX-aOm"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V4F-lT-uX8" userLabel="Channel Form wrapper">
+                            <scrollView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="XNz-Dz-IVD">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <subviews>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V4F-lT-uX8" userLabel="Channel Form wrapper">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <color key="backgroundColor" red="1" green="0.99993503090000002" blue="0.99997496600000002" alpha="0.79178103889999996" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                    </view>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBC-x7-caZ" userLabel="Form container">
                                         <rect key="frame" x="150" y="134" width="300" height="268"/>
                                         <subviews>
@@ -293,38 +298,44 @@
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.99993503090000002" blue="0.99997496600000002" alpha="0.79178103889999996" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="fBC-x7-caZ" firstAttribute="centerY" secondItem="V4F-lT-uX8" secondAttribute="centerY" id="aSc-GW-kBc"/>
-                                    <constraint firstItem="fBC-x7-caZ" firstAttribute="height" secondItem="V4F-lT-uX8" secondAttribute="height" multiplier="0.5" id="eWW-aB-2fe"/>
-                                    <constraint firstItem="fBC-x7-caZ" firstAttribute="centerX" secondItem="V4F-lT-uX8" secondAttribute="centerX" id="mO4-gc-0IK"/>
+                                    <constraint firstAttribute="bottom" secondItem="V4F-lT-uX8" secondAttribute="bottom" id="4az-7p-CZd"/>
+                                    <constraint firstItem="fBC-x7-caZ" firstAttribute="centerX" secondItem="XNz-Dz-IVD" secondAttribute="centerX" id="O67-YU-3OU"/>
+                                    <constraint firstAttribute="trailing" secondItem="V4F-lT-uX8" secondAttribute="trailing" id="a67-cy-qyb"/>
+                                    <constraint firstItem="V4F-lT-uX8" firstAttribute="top" secondItem="XNz-Dz-IVD" secondAttribute="top" id="clM-TU-Zs7"/>
+                                    <constraint firstItem="V4F-lT-uX8" firstAttribute="leading" secondItem="XNz-Dz-IVD" secondAttribute="leading" id="euD-Ek-bDs"/>
+                                    <constraint firstItem="V4F-lT-uX8" firstAttribute="centerY" secondItem="XNz-Dz-IVD" secondAttribute="centerY" id="k58-Xj-zDd"/>
+                                    <constraint firstItem="fBC-x7-caZ" firstAttribute="centerY" secondItem="XNz-Dz-IVD" secondAttribute="centerY" id="piS-4Y-Moa"/>
+                                    <constraint firstItem="fBC-x7-caZ" firstAttribute="height" secondItem="XNz-Dz-IVD" secondAttribute="height" multiplier="0.5" id="pr1-dz-24J"/>
+                                    <constraint firstItem="V4F-lT-uX8" firstAttribute="centerX" secondItem="XNz-Dz-IVD" secondAttribute="centerX" id="xoX-mS-8xZ"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Fb8-0F-wWp" appends="YES" id="yql-VU-p8O"/>
+                                    <outletCollection property="gestureRecognizers" destination="Fb8-0F-wWp" appends="YES" id="yOV-De-0b9"/>
                                 </connections>
-                            </view>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Fg0-np-Whc" firstAttribute="top" secondItem="V4F-lT-uX8" secondAttribute="bottom" id="9d5-rN-bpG"/>
-                            <constraint firstItem="V4F-lT-uX8" firstAttribute="top" secondItem="hPb-Qr-DOQ" secondAttribute="bottom" id="Dp2-MR-h4q"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="V4F-lT-uX8" secondAttribute="trailing" constant="-20" id="HT8-5e-kSV"/>
+                            <constraint firstItem="XNz-Dz-IVD" firstAttribute="leading" secondItem="g16-Wi-ZOn" secondAttribute="leadingMargin" constant="-20" id="Byg-cf-h7D"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XNz-Dz-IVD" secondAttribute="trailing" constant="-20" id="Kid-br-MXC"/>
                             <constraint firstItem="58l-kl-Umu" firstAttribute="top" secondItem="hPb-Qr-DOQ" secondAttribute="bottom" id="QNL-Qh-x1h"/>
-                            <constraint firstItem="V4F-lT-uX8" firstAttribute="leading" secondItem="g16-Wi-ZOn" secondAttribute="leadingMargin" constant="-20" id="RwD-Q1-xcp"/>
                             <constraint firstAttribute="trailing" secondItem="58l-kl-Umu" secondAttribute="trailing" id="SVV-0q-eye"/>
                             <constraint firstItem="58l-kl-Umu" firstAttribute="leading" secondItem="g16-Wi-ZOn" secondAttribute="leading" id="f0e-ad-NqQ"/>
+                            <constraint firstItem="XNz-Dz-IVD" firstAttribute="top" secondItem="hPb-Qr-DOQ" secondAttribute="bottom" id="gpi-i1-Gp5"/>
+                            <constraint firstItem="Fg0-np-Whc" firstAttribute="top" secondItem="XNz-Dz-IVD" secondAttribute="bottom" id="hBg-yP-NG3"/>
                             <constraint firstItem="Fg0-np-Whc" firstAttribute="top" secondItem="58l-kl-Umu" secondAttribute="bottom" id="vCl-Q8-jY4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Camera" id="8Yc-UZ-NQh"/>
                     <connections>
                         <outlet property="aivHTTPLoadingIndicator" destination="8Sc-oG-gH6" id="BY2-yY-PqO"/>
+                        <outlet property="svChannelFormWrapper" destination="XNz-Dz-IVD" id="Mvn-Pd-znm"/>
                         <outlet property="tbClose" destination="qbP-9S-pvb" id="a9K-VJ-AMz"/>
                         <outlet property="tbRecord" destination="sQ1-m3-a26" id="dpH-H2-k4H"/>
                         <outlet property="tfChannelTitle" destination="8Uz-6g-H1w" id="u3j-a4-n6O"/>
                         <outlet property="tvChannelDescription" destination="7yX-Ls-1bB" id="ZSX-Zz-W6t"/>
                         <outlet property="vCameraPreviewContainer" destination="Rvm-uD-j0O" id="bz5-fq-0Hs"/>
-                        <outlet property="vChannelFormWrapper" destination="V4F-lT-uX8" id="6oy-lp-QBl"/>
+                        <outlet property="vChannelFormContainer" destination="fBC-x7-caZ" id="TZa-EB-LIF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D3-LX-hDz" userLabel="First Responder" sceneMemberID="firstResponder"/>

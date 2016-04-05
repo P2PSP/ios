@@ -18,7 +18,8 @@
 @property(weak, nonatomic) IBOutlet UIView *vCameraPreviewContainer;
 @property(weak, nonatomic) IBOutlet UITextField *tfChannelTitle;
 @property(weak, nonatomic) IBOutlet UITextView *tvChannelDescription;
-@property(weak, nonatomic) IBOutlet UIView *vChannelFormWrapper;
+@property(weak, nonatomic) IBOutlet UIScrollView *svChannelFormWrapper;
+@property(weak, nonatomic) IBOutlet UIView *vChannelFormContainer;
 @property(weak, nonatomic)
     IBOutlet UIActivityIndicatorView *aivHTTPLoadingIndicator;
 
@@ -35,6 +36,8 @@
   [[UIDevice currentDevice]
       setValue:[NSNumber numberWithInt:UIInterfaceOrientationPortrait]
         forKey:@"orientation"];
+
+  [self registerForKeyboardNotifications];
 
   // Set toolbars transparent
   [self.tbClose setBackgroundImage:[UIImage new]
@@ -212,6 +215,7 @@
   // TODO: Read and validate inputs views (title and description)
   // TODO: Make http post with data
   [self.aivHTTPLoadingIndicator startAnimating];
+  [self.view endEditing:YES];
   // TODO: Display and animate activity indicator view, and disable all inputs
   // and OK button
   // TODO: Wait for the http response (the channel ID to emit to)
@@ -225,8 +229,8 @@
     CATransition *animation = [CATransition animation];
     animation.type = kCATransitionFade;
     animation.duration = 0.2;
-    [self.vChannelFormWrapper.layer addAnimation:animation forKey:nil];
-    [self.vChannelFormWrapper setHidden:YES];
+    [self.svChannelFormWrapper.layer addAnimation:animation forKey:nil];
+    [self.svChannelFormWrapper setHidden:YES];
     [self.aivHTTPLoadingIndicator stopAnimating];
   });
 }
@@ -238,6 +242,60 @@
  */
 - (IBAction)onKeyboardDismiss:(id)sender {
   [self.view endEditing:YES];
+}
+
+/**
+ *  This functions help us to deal with keyboard overlapping
+ */
+- (void)registerForKeyboardNotifications {
+  [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(keyboardWasShown:)
+             name:UIKeyboardWillShowNotification
+           object:nil];
+  [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(keyboardWillBeHidden:)
+             name:UIKeyboardWillHideNotification
+           object:nil];
+}
+
+/**
+ *  Called when the UIKeyboardWillShowNotification is sent.
+ *
+ *  @param aNotification A NSNotification object
+ */
+- (void)keyboardWasShown:(NSNotification *)aNotification {
+  NSDictionary *info = [aNotification userInfo];
+  CGSize kbSize =
+      [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+  self.svChannelFormWrapper.contentInset = contentInsets;
+  self.svChannelFormWrapper.scrollIndicatorInsets = contentInsets;
+
+  // If active text field is hidden by keyboard, scroll it so it's visible
+  // Your application might not need or want this behavior.
+  CGRect aRect = self.view.frame;
+  aRect.size.height -= kbSize.height;
+  if (aRect.size.height < (self.vChannelFormContainer.frame.origin.y +
+                           self.vChannelFormContainer.frame.size.height)) {
+    CGPoint scrollPoint =
+        CGPointMake(0.0, ((self.vChannelFormContainer.frame.origin.y +
+                           self.vChannelFormContainer.frame.size.height)) -
+                             aRect.size.height);
+    [self.svChannelFormWrapper setContentOffset:scrollPoint animated:YES];
+  }
+}
+
+/**
+ *  Called when the UIKeyboardWillHideNotification is sent
+ *
+ *  @param aNotification A NSNotification object
+ */
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification {
+  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+  self.svChannelFormWrapper.contentInset = contentInsets;
+  self.svChannelFormWrapper.scrollIndicatorInsets = contentInsets;
 }
 
 @end
