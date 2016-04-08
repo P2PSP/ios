@@ -11,7 +11,7 @@
 #import "HTTPClient.h"
 
 @interface CameraController ()
-@property(weak, nonatomic) IBOutlet UIToolbar *tbClose;
+@property(weak, nonatomic) IBOutlet UIToolbar *tbTop;
 @property(weak, nonatomic) IBOutlet UIToolbar *tbRecord;
 @property(nonatomic) IBOutlet UIBarButtonItem *bbiRecord;
 @property(nonatomic) IBOutlet UIBarButtonItem *bbiStop;
@@ -27,6 +27,7 @@
 @property(nonatomic) HTTPClient *mediaSender;
 @property(nonatomic) VideoRecorder *videoRecorder;
 @property(nonatomic, weak) IBOutlet UIView *preview;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *bbiChannelTitle;
 
 @property(nonatomic) NSString *address;
 @end
@@ -41,11 +42,11 @@
   [self registerForKeyboardNotifications];
 
   // Set toolbars transparent
-  [self.tbClose setBackgroundImage:[UIImage new]
-                forToolbarPosition:UIBarPositionAny
-                        barMetrics:UIBarMetricsDefault];
-  [self.tbClose setShadowImage:[UIImage new]
-            forToolbarPosition:UIToolbarPositionAny];
+  [self.tbTop setBackgroundImage:[UIImage new]
+              forToolbarPosition:UIBarPositionAny
+                      barMetrics:UIBarMetricsDefault];
+  [self.tbTop setShadowImage:[UIImage new]
+          forToolbarPosition:UIToolbarPositionAny];
 
   [self.tbRecord setBackgroundImage:[UIImage new]
                  forToolbarPosition:UIBarPositionAny
@@ -215,32 +216,35 @@
 - (IBAction)onChannelOK:(id)sender {
   // TODO: Read and validate inputs views (title and description)
 
+  if ([self.tfChannelTitle.text isEqualToString:@""]) {
+    return;
+  }
+
+  self.bbiChannelTitle.title = self.tfChannelTitle.text;
+
   // Display and animate activity indicator, disable inputs
-  [self.tfChannelTitle setEnabled:NO];
-  [self.tvChannelDescription setEditable:NO];
-  [self.tvChannelDescription setSelectable:NO];
-  [self.tvChannelDescription setSelectable:NO];
-  [self.bChannelOK setEnabled:NO];
-  [self.view endEditing:YES];
-  [self.aivHTTPLoadingIndicator startAnimating];
 
   // TODO: Make http post with data
 
   // TODO: Wait for the http response (the channel ID to emit to)
 
   // TODO: Add to the callback response of the http request
-  double delayInSeconds = 2.0;
-  dispatch_time_t popTime = dispatch_time(
-      DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-  dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-    // Hide wrapper form view
-    CATransition *animation = [CATransition animation];
-    animation.type = kCATransitionFade;
-    animation.duration = 0.2;
-    [self.svChannelFormWrapper.layer addAnimation:animation forKey:nil];
-    [self.svChannelFormWrapper setHidden:YES];
-    [self.aivHTTPLoadingIndicator stopAnimating];
-  });
+  // Hide wrapper form view
+  CATransition *animation = [CATransition animation];
+  animation.type = kCATransitionFade;
+  animation.duration = 0.2;
+  [self.svChannelFormWrapper.layer addAnimation:animation forKey:nil];
+  [self.svChannelFormWrapper setHidden:YES];
+  [self.view endEditing:YES];
+}
+
+- (IBAction)onChannelEdit:(id)sender {
+  // Show wrapper form view
+  CATransition *animation = [CATransition animation];
+  animation.type = kCATransitionFade;
+  animation.duration = 0.2;
+  [self.svChannelFormWrapper.layer addAnimation:animation forKey:nil];
+  [self.svChannelFormWrapper setHidden:NO];
 }
 
 /**

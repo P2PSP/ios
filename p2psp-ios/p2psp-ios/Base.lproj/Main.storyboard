@@ -189,6 +189,16 @@
                                                     <segue destination="TFy-dx-ZdJ" kind="unwind" unwindAction="unwindToChannels:" id="fJG-2q-eff"/>
                                                 </connections>
                                             </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="HAg-gc-MO3"/>
+                                            <barButtonItem enabled="NO" id="d2y-zP-7RB">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="MsG-q2-VQU"/>
+                                            <barButtonItem systemItem="edit" id="w48-yf-T7J">
+                                                <connections>
+                                                    <action selector="onChannelEdit:" destination="zhm-d7-VLe" id="rYz-Y8-GvW"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </items>
                                     </toolbar>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="sQ1-m3-a26">
@@ -282,11 +292,11 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Uz-6g-H1w">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Channel title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Uz-6g-H1w">
                                                 <rect key="frame" x="50" y="48" width="242" height="30"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="no" returnKeyType="done"/>
                                             </textField>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8Sc-oG-gH6">
                                                 <rect key="frame" x="140" y="124" width="20" height="20"/>
@@ -351,9 +361,10 @@
                     <connections>
                         <outlet property="aivHTTPLoadingIndicator" destination="8Sc-oG-gH6" id="BY2-yY-PqO"/>
                         <outlet property="bChannelOK" destination="A2m-h8-1Uq" id="hmq-94-wLS"/>
+                        <outlet property="bbiChannelTitle" destination="d2y-zP-7RB" id="tmf-yV-ezG"/>
                         <outlet property="svChannelFormWrapper" destination="XNz-Dz-IVD" id="Mvn-Pd-znm"/>
-                        <outlet property="tbClose" destination="qbP-9S-pvb" id="a9K-VJ-AMz"/>
                         <outlet property="tbRecord" destination="sQ1-m3-a26" id="dpH-H2-k4H"/>
+                        <outlet property="tbTop" destination="qbP-9S-pvb" id="Kmy-wH-Zom"/>
                         <outlet property="tfChannelTitle" destination="8Uz-6g-H1w" id="u3j-a4-n6O"/>
                         <outlet property="tvChannelDescription" destination="7yX-Ls-1bB" id="ZSX-Zz-W6t"/>
                         <outlet property="vCameraPreviewContainer" destination="Rvm-uD-j0O" id="bz5-fq-0Hs"/>
