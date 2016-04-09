@@ -32,7 +32,8 @@
  *
  *  @param handler The handler function
  */
-- (void)getChannelsWithHandler:(void (^)(NSArray *, NSError *))handler;
+- (void)getChannelsWithHandler:(void (^)(NSArray<Channel *> *,
+                                         NSError *))handler;
 
 /**
  *  Make an HTTP POST to /api/channels
@@ -63,7 +64,10 @@
  *
  *  @param localFileURL The local video file path
  *  @param handler      The handler function
+ *
+ *  @return YES if the conditions before making the connection are satified, NO
+ * otherwise
  */
-- (void)emit:(NSURL *)localFileURL withHandler:(void (^)(NSError *))handler;
+- (BOOL)emit:(NSURL *)localFileURL withHandler:(void (^)(NSError *))handler;
 
 @end

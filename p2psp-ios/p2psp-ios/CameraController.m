@@ -124,15 +124,6 @@
 
   [self deleteTempDirFile];
 
-  /*  dispatch_async(
-        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-          [self.mediaSender
-              createConnection:
-                  [NSURL URLWithString:[NSString
-                                           stringWithFormat:@"http://%@/api/emit",
-                                                            self.address]]];
-        });*/
-
   [_videoRecorder
       startRecordingForDropFileWithSeconds:1
                                  frameRate:30
@@ -167,13 +158,21 @@
 - (void)videoRecorder:(VideoRecorder *)videoRecorder
     recoringDidFinishToOutputFileURL:(NSURL *)outputFileURL
                                error:(NSError *)error {
-  NSLog(@"recording finished URL: %@", outputFileURL);
+  // NSLog(@"recording finished URL: %@", outputFileURL);
 
   dispatch_async(
       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self.mediaSender postVideo:outputFileURL];
+        [self.server emit:outputFileURL
+              withHandler:^(NSError *error) {
+                if (!error) {
+                  [[NSFileManager defaultManager] removeItemAtURL:outputFileURL
+                                                            error:nil];
+                }
+              }];
+
+        /*[self.mediaSender postVideo:outputFileURL];
         [[NSFileManager defaultManager] removeItemAtPath:outputFileURL
-                                                   error:nil];
+                                                   error:nil];*/
       });
 
   // [self saveToCameraRoll:outputFileURL];
