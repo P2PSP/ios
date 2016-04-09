@@ -32,6 +32,7 @@
 		A97D88DB1C555CD600428FC7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A97D88D21C555CD600428FC7 /* CoreMedia.framework */; };
 		A97D88DC1C555CD600428FC7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A97D88D31C555CD600428FC7 /* AudioToolbox.framework */; };
 		A97D88DD1C555CD600428FC7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A97D88D41C555CD600428FC7 /* CoreAudio.framework */; };
+		A992AA5E1CB93CB80044ABB4 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = A992AA5D1CB93CB80044ABB4 /* Server.m */; };
 		A994296B1C768ADF00CAD774 /* ChannelsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A994296A1C768ADF00CAD774 /* ChannelsController.m */; };
 		A994296E1C768C3200CAD774 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = A994296D1C768C3200CAD774 /* Channel.m */; };
 		A9DC89681C7B2FD300151F87 /* BocastClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DC89671C7B2FD300151F87 /* BocastClient.m */; };
@@ -99,6 +100,8 @@
 		A97D88D21C555CD600428FC7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A97D88D31C555CD600428FC7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A97D88D41C555CD600428FC7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		A992AA5C1CB93CB80044ABB4 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		A992AA5D1CB93CB80044ABB4 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		A99429691C768ADF00CAD774 /* ChannelsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelsController.h; sourceTree = "<group>"; };
 		A994296A1C768ADF00CAD774 /* ChannelsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelsController.m; sourceTree = "<group>"; };
 		A994296C1C768C3200CAD774 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 		A9DC89691C7B2FDA00151F87 /* network */ = {
 			isa = PBXGroup;
 			children = (
+				A992AA5C1CB93CB80044ABB4 /* Server.h */,
+				A992AA5D1CB93CB80044ABB4 /* Server.m */,
 				A9316CA91C9AEEAD005BD61C /* HTTPClient.h */,
 				A9316CAA1C9AEEAD005BD61C /* HTTPClient.m */,
 				A9DC89661C7B2FD300151F87 /* BocastClient.h */,
@@ -449,6 +454,7 @@
 				A994296E1C768C3200CAD774 /* Channel.m in Sources */,
 				A9FE90251C56A39E00C7C91C /* trace.cc in Sources */,
 				A9316CB01CA0383D005BD61C /* NavigationController.m in Sources */,
+				A992AA5E1CB93CB80044ABB4 /* Server.m in Sources */,
 				A90F96C81C9AE2FC00BC02AA /* VideoRecorder.m in Sources */,
 				CFD663AD1C9AD1AB0036638E /* CameraController.m in Sources */,
 				A994296B1C768ADF00CAD774 /* ChannelsController.m in Sources */,

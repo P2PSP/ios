@@ -9,6 +9,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "CameraController.h"
 #import "HTTPClient.h"
+#import "Server.h"
 
 @interface CameraController ()
 @property(weak, nonatomic) IBOutlet UIToolbar *tbTop;
@@ -30,6 +31,9 @@
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *bbiChannelTitle;
 
 @property(nonatomic) NSString *address;
+@property(nonatomic) NSString *channelID;
+@property(nonatomic) Server *server;
+
 @end
 
 @implementation CameraController
@@ -72,6 +76,8 @@
   [self.bbiRecord setTintColor:[UIColor whiteColor]];
 
   [self updateBarButtonItem:self.bbiRecord inToolbar:self.tbRecord];
+
+  self.server = [[Server alloc] initWithServerURL:self.address];
 
   // Setup video recorder and http client
   self.mediaSender = [[HTTPClient alloc]
@@ -223,19 +229,62 @@
   self.bbiChannelTitle.title = self.tfChannelTitle.text;
 
   // Display and animate activity indicator, disable inputs
-
-  // TODO: Make http post with data
-
-  // TODO: Wait for the http response (the channel ID to emit to)
-
-  // TODO: Add to the callback response of the http request
-  // Hide wrapper form view
-  CATransition *animation = [CATransition animation];
-  animation.type = kCATransitionFade;
-  animation.duration = 0.2;
-  [self.svChannelFormWrapper.layer addAnimation:animation forKey:nil];
-  [self.svChannelFormWrapper setHidden:YES];
+  [self.tfChannelTitle setEnabled:NO];
+  [self.tvChannelDescription setEditable:NO];
+  [self.tvChannelDescription setSelectable:NO];
+  [self.tvChannelDescription setSelectable:NO];
+  [self.bChannelOK setEnabled:NO];
   [self.view endEditing:YES];
+  [self.aivHTTPLoadingIndicator startAnimating];
+
+  // Common handler callback for both create and update channel info
+  void (^completionHandler)(NSError *error) = ^(NSError *error) {
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+      // TODO: Handle errors
+
+      [self.tfChannelTitle setEnabled:YES];
+      [self.tvChannelDescription setEditable:YES];
+      [self.tvChannelDescription setSelectable:YES];
+      [self.tvChannelDescription setSelectable:YES];
+      [self.bChannelOK setEnabled:YES];
+      [self.aivHTTPLoadingIndicator stopAnimating];
+
+      // Hide wrapper form view
+      CATransition *animation = [CATransition animation];
+      animation.type = kCATransitionFade;
+      animation.duration = 0.2;
+      [self.svChannelFormWrapper.layer addAnimation:animation forKey:nil];
+      [self.svChannelFormWrapper setHidden:YES];
+    });
+
+  };
+
+  if (!self.channelID) {
+    // Make http post with data
+    [self.server createChannelwithTitle:self.tfChannelTitle.text
+                         andDescription:self.tvChannelDescription.text
+                            withHandler:^(NSString *channelID, NSError *error) {
+
+                              // Store the channel supplied by server
+                              self.channelID = channelID;
+                              NSLog(@"ID: %@", channelID);
+
+                              completionHandler(error);
+
+                            }];
+
+  } else {
+    // Make http post with data
+    [self.server updateChannel:self.channelID
+                     withTitle:self.tfChannelTitle.text
+                andDescription:self.tvChannelDescription.text
+                   withHandler:^(NSError *error) {
+
+                     completionHandler(error);
+
+                   }];
+  }
 }
 
 - (IBAction)onChannelEdit:(id)sender {
