@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Channel.h"
 
 @interface Server : NSObject
 

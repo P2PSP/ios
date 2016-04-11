@@ -6,7 +6,6 @@
 //  Copyright © 2016 P2PSP. All rights reserved.
 //
 
-#import "Channel.h"
 #import "Server.h"
 
 @interface Server ()
@@ -192,8 +191,8 @@
       channel.title = [jsonChannel valueForKey:@"title"];
     }
 
-    if ([channel respondsToSelector:NSSelectorFromString(@"desc")]) {
-      channel.desc = [jsonChannel valueForKey:@"desc"];
+    if ([channel respondsToSelector:NSSelectorFromString(@"description")]) {
+      channel.desc = [jsonChannel valueForKey:@"description"];
     }
 
     if ([channel respondsToSelector:NSSelectorFromString(@"ip")]) {

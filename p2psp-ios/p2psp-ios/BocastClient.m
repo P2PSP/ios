@@ -63,8 +63,8 @@
       channel.title = [jsonChannel valueForKey:@"title"];
     }
 
-    if ([channel respondsToSelector:NSSelectorFromString(@"desc")]) {
-      channel.desc = [jsonChannel valueForKey:@"desc"];
+    if ([channel respondsToSelector:NSSelectorFromString(@"description")]) {
+      channel.desc = [jsonChannel valueForKey:@"description"];
     }
 
     if ([channel respondsToSelector:NSSelectorFromString(@"ip")]) {
